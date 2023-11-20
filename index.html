@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hello, world!</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="black-bg">
+      <div class="white-bg">
+        <h4>로그인하세요</h4>
+        <form id="form-tag" action="success.html">
+          <div class="input-box">
+            <label for="email" id="form-label">ID</label>
+            <input
+              type="text"
+              id="email"
+              placeholder="ID 입력하시오."
+              value="rlgywnd"
+            />
+            <div class="failure-id">ID는 4글자 이상으로 입력하세요.</div>
+          </div>
+          <div class="input-box">
+            <label for="password" id="form-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="password 입력하시오."
+            />
+            <div class="failure-pw">비번은 6글자 이상으로 입력하세요.</div>
+          </div>
+          <button id="submit-btn" type="submit">완료</button>
+        </form>
+        <button type="button" class="btn btn-danger" id="close">닫기</button>
+      </div>
+    </div>
+    <script>
+      document.querySelector('#email').addEventListener('input', (event) => {
+        console.log('아이디', event.target.value);
+      });
+      console.log('value 값', document.querySelector('#email').value);
+      // 완료버튼 눌렀을때 아이디 입력란이 공백이면 알림창 띄워 주세요
+
+      $('form').on('submit', (e) => {
+        if (document.querySelector('#email').value.length < 4) {
+          e.preventDefault(); // 폼 전송을 막음!
+          alert('더 쳐!');
+        }
+        if (document.getElementById('password').value.length < 6) {
+          e.preventDefault(); // 폼 전송 안되게 막음;
+          alert('비번 6글자 이상 써라~');
+        }
+      });
+
+      document.querySelector('#email').addEventListener('change', () => {
+        if (document.querySelector('#email').value.length < 4) {
+          document.querySelector('.failure-id').classList.add('show-vali');
+        } else {
+          document.querySelector('.failure-id').classList.remove('show-vali');
+        }
+      });
+      document.querySelector('#password').addEventListener('change', () => {
+        if (document.querySelector('#password').value.length < 6) {
+          document.querySelector('.failure-pw').classList.add('show-valipw');
+        } else {
+          document.querySelector('.failure-pw').classList.remove('show-valipw');
+        }
+      });
+    </script>
+
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand">Navbar</span>
+        <span class="badge bg-dark">Dark 🔄</span>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+
+    <script>
+      // 다크모드 만들어보기
+      var count = 0;
+
+      $('.badge').on('click', () => {
+        count++;
+        console.log(count);
+        if (count % 2 === 0) {
+          $('.badge').html('Dark 🔄');
+          $('body').removeClass('dark-mode');
+          $('body').addClass('light-mode');
+          $('.navbar').addClass('navbar-light bg-light');
+          $('.navbar').removeClass('navbar-dark bg-dark');
+        } else {
+          $('.badge').html('Light 🔄');
+          $('body').removeClass('light-mode');
+          $('body').addClass('dark-mode');
+          $('.navbar').addClass('navbar-dark bg-dark');
+          $('.navbar').removeClass('navbar-light bg-light');
+        }
+      });
+    </script>
+
+    <ul class="list-group">
+      <li class="list-group-item">An item</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+      <li class="list-group-item">A fourth item</li>
+      <li class="list-group-item">And a fifth one</li>
+    </ul>
+    <button id="login-btn">로그인</button>
+
+    <script>
+      // 1. Jquery 사용
+      $('#login-btn').on('click', () => {
+        $('.black-bg').addClass('show-modal');
+      });
+      $('#close').on('click', () => {
+        $('.black-bg').removeClass('show-modal');
+      });
+
+      // 2. 셀렉터로 class 탈부착 사용
+      // document.getElementById('login-btn').addEventListener('click', () => {
+      //   document
+      //     .getElementsByClassName('black-bg')[0]
+      //     .classList.add('show-modal');
+      // });
+      // document.querySelector('#close').addEventListener('click', () => {
+      //   document.querySelector('.black-bg').classList.remove('show-modal');
+      // });
+
+      // 3. 셀렉터에 스타일 사용
+      // document.querySelector('#login-btn').addEventListener('click', () => {
+      //   document.querySelector('.black-bg').style.display = 'block';
+      // });
+      // document.querySelector('#close').addEventListener('click', () => {
+      //   document.querySelector('.black-bg').style.display = 'none';
+      // });
+
+      // ----- Jquery ------
+      // $('.hello').html('쉿~');
+      // $('.hello').css('color', 'blue');
+      // $('.hello').css('backgroundColor', 'yellow');
+      // $('.hello').addClass('show-me-the');
+      // $('.hello').toggleClass('show-me-the');
+      // $('.btn').on('click', () => {
+      //   $('.hello').html('하이요');
+      //   $('.hello').hide();
+      //   $('.hello').slideUp();
+      // });
+      // console.log($('.hello'));
+
+      // ------  toggle -> 탈부착가능매서드  ------
+      document
+        .querySelector('.navbar-toggler')
+        .addEventListener('click', () => {
+          document.querySelector('.list-group').classList.toggle('show');
+        });
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
