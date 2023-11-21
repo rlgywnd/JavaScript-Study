@@ -58,9 +58,15 @@
           e.preventDefault(); // 폼 전송을 막음!
           alert('더 쳐!');
         }
-        if (document.getElementById('password').value.length < 6) {
+        let inputPassword = document.querySelector('#password').value;
+        if (inputPassword.length < 6) {
           e.preventDefault(); // 폼 전송 안되게 막음;
           alert('비번 6글자 이상 써라~');
+        } else if (/[A-Z]/.test(inputPassword) && inputPassword.length >= 6) {
+          alert('대문자 사용 잘했엉');
+        } else {
+          e.preventDefault();
+          alert('대문자 사용해라!');
         }
       });
 
@@ -121,6 +127,52 @@
       <li class="list-group-item">And a fifth one</li>
     </ul>
     <button id="login-btn">로그인</button>
+
+    <!-- <div class="alert alert-danger">
+      <span class="seconds"></span>
+      초 이내 구매시 사은품 증정!
+    </div> -->
+
+    <script>
+      // let count1 = 5;
+      // document.querySelector('.seconds').innerHTML = count1;
+      // let abcd = setInterval(() => {
+      //   count1--;
+      //   if (count1 >= 0) {
+      //     document.querySelector('.seconds').innerHTML = count1;
+      //   }
+      //   if (count1 < 0) {
+      //     document.querySelector('.alert').style.visibility = 'hidden';
+      //     document.querySelector('.alert').style.opacity = '0';
+      //     console.log(count1);
+      //     clearInterval(abcd); // 타이머를 끄고 싶을때~ 미리 타이머를 변수지정해두고 저렇게 인자로 넘긴다
+      //   }
+      // }, 1000);
+
+      // 타이머 함수 활용 setTimeout(콜백함수, 밀리터리초), setInterval
+
+      // -------------  setTimeout 함수 활용! ----------
+
+      // 1. jquery사용한 setTimeout
+      // setTimeout(() => {
+      //   $('.alert').css('display', 'none');
+      // }, 3000);
+      // Jquery 응용 hide() 매서드 -> display = 'none' 으로 바꿔줘라랑 같은 의미!
+      // setTimeout(() => {
+      //   $('.alert').hide();
+      // }, 3000);
+
+      // 2.
+      // setTimeout(() => {
+      //   document.querySelector('.alert').style.visibility = 'hidden';
+      //   document.querySelector('.alert').style.opacity = '0';
+      // }, 3000);
+
+      // -----------  setInterval 함수 활용 ----------
+      // setInterval(() => {
+      //   console.log('ㅎㅇ~');
+      // }, 2000);
+    </script>
 
     <script>
       // 1. Jquery 사용

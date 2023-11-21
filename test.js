@@ -48,3 +48,20 @@ function test2(a, b) {
     console.log('불합격');
   }
 }
+
+let age = 29;
+const area = 'incheon';
+
+function A(money) {
+  let result = money;
+  if (money < 50000 && count !== 2) {
+    let first = result + result * 0.15;
+    let seconds = first + first * 0.15;
+    result = seconds;
+  } else if (money >= 50000 && count !== 2) {
+    let first = result + result * 0.2;
+    let seconds = first + first * 0.2;
+    result = seconds;
+  }
+  return result;
+}
