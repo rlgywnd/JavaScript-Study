@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="test.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div>test</div>
+        <button class="ham-btn">햄버거</button>
+        <ul class="list-group">
+          <li class="list">1</li>
+          <li class="list">2</li>
+          <li class="list">3</li>
+          <li class="list">4</li>
+        </ul>
+      </div>
+      <button class="login-btn">로그인</button>
+      <div style="height: 3000px"></div>
+      <script>
+        document.querySelector('.ham-btn').addEventListener('click', () => {
+          document.querySelector('.list-group').classList.toggle('show');
+        });
+      </script>
+    </div>
+  </body>
+</html>

@@ -96,7 +96,56 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
+      <ul class="list-group">
+        <li class="list-group-item">An item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>
+      </ul>
     </nav>
+
+    <script>
+      // window.addEventListener('scroll', () => {
+      //   console.log(window.scrollY);
+      // });
+
+      $(window).on('scroll', () => {
+        if (window.scrollY >= 50) {
+          document.querySelector('.navbar-brand').style.fontSize = '20px';
+        } else {
+          document.querySelector('.navbar-brand').style.fontSize = '25px';
+        }
+      });
+    </script>
+
+    <div class="login-area">
+      <p class="login-title">로그인하러 가기</p>
+      <button id="login-btn">로그인</button>
+    </div>
+
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident
+      possimus in earum autem sequi, quibusdam esse voluptates nisi impedit
+      voluptas dolor consequatur neque, veniam ratione quis minus. Neque, iusto
+      architecto.
+    </div>
+
+    <script>
+      document.querySelector('.lorem').addEventListener('scroll', () => {
+        let scroll = document.querySelector('.lorem').scrollTop; // 스크롤 위치 아는법
+        let scrollHe = document.querySelector('.lorem').scrollHeight; // 스크롤바 실제 높이 구하는 법
+        let divHe = document.querySelector('.lorem').clientHeight; // div박스 높이
+        console.log(scroll);
+        console.log('스크롤 높이 : ', scrollHe);
+        console.log('div박스 높이: ', divHe);
+        if (scroll === 140) {
+          alert('다 읽음.');
+        }
+      });
+    </script>
+
+    <div style="height: 1000px"></div>
 
     <script>
       // 다크모드 만들어보기
@@ -121,15 +170,7 @@
       });
     </script>
 
-    <ul class="list-group">
-      <li class="list-group-item">An item</li>
-      <li class="list-group-item">A second item</li>
-      <li class="list-group-item">A third item</li>
-      <li class="list-group-item">A fourth item</li>
-      <li class="list-group-item">And a fifth one</li>
-    </ul>
-    <button id="login-btn">로그인</button>
-
+    <!-- 캐러셀 만들기 -->
     <div style="overflow: hidden">
       <div class="slide-container">
         <div class="slide-box">
@@ -149,12 +190,13 @@
         </div>
       </div>
     </div>
-
-    <button class="slide-1">1</button>
-    <button class="slide-2">2</button>
-    <button class="slide-3">3</button>
-    <button class="slide-next">다음</button>
-    <button class="slide-before">이전</button>
+    <div class="slide-btn">
+      <button class="slide-1">1</button>
+      <button class="slide-2">2</button>
+      <button class="slide-3">3</button>
+      <button class="slide-next">다음</button>
+      <button class="slide-before">이전</button>
+    </div>
 
     <script>
       // 캐러셀 만들어보기
@@ -177,43 +219,43 @@
       });
       // 다음 버튼 만들기
       // 다음버튼 누르면 지금 보이는 사진이 1이면 2번~ 2면 3번~ 3이면 가마니~
-      // document.querySelector('.slide-next').addEventListener('click', () => {
-      //   if (prevImg === 1) {
-      //     $('.slide-container').css('transform', 'translateX(-100vw)');
-      //     prevImg = 2;
-      //   } else if (prevImg === 2) {
-      //     $('.slide-container').css('transform', 'translateX(-200vw)');
-      //     prevImg = 3;
-      //   }
-      // });
-      // 이전 버튼 만들기
-      // $('.slide-before').on('click', () => {
-      //   if (prevImg === 2) {
-      //     $('.slide-container').css('transform', 'translateX(0)');
-      //     prevImg = 1;
-      //   } else if (prevImg === 3) {
-      //     $('.slide-container').css('transform', 'translateX(-100vw)');
-      //     prevImg = 2;
-      //   }
-      // });
-      // console.log('prevImg : ', prevImg);
-
-      // 번호매김 없이 그냥 다음 버튼만 있을때 만들
-      let nextStack = 0;
-      $('.slide-next').on('click', () => {
-        nextStack += 100;
-        $('.slide-container').css('transform', `translate(-${nextStack}vw)`);
-        console.log('nextStack : ', nextStack);
-      });
-      $('.slide-before').on('click', () => {
-        if (nextStack > 0) {
-          nextStack -= 100;
-          $('.slide-container').css('transform', `translate(-${nextStack}vw)`);
-          console.log('nextStack : ', nextStack);
-        } else {
-          alert('첫번째 이미지입니다^^');
+      document.querySelector('.slide-next').addEventListener('click', () => {
+        if (prevImg === 1) {
+          $('.slide-container').css('transform', 'translateX(-100vw)');
+          prevImg = 2;
+        } else if (prevImg === 2) {
+          $('.slide-container').css('transform', 'translateX(-200vw)');
+          prevImg = 3;
         }
       });
+      // 이전 버튼 만들기
+      $('.slide-before').on('click', () => {
+        if (prevImg === 2) {
+          $('.slide-container').css('transform', 'translateX(0)');
+          prevImg = 1;
+        } else if (prevImg === 3) {
+          $('.slide-container').css('transform', 'translateX(-100vw)');
+          prevImg = 2;
+        }
+      });
+      console.log('prevImg : ', prevImg);
+
+      // 번호매김 없이 그냥 다음 이전 버튼만 있을때 만들어보기
+      // let nextStack = 0;
+      // $('.slide-next').on('click', () => {
+      //   nextStack += 100;
+      //   $('.slide-container').css('transform', `translate(-${nextStack}vw)`);
+      //   console.log('nextStack : ', nextStack);
+      // });
+      // $('.slide-before').on('click', () => {
+      //   if (nextStack > 0) {
+      //     nextStack -= 100;
+      //     $('.slide-container').css('transform', `translate(-${nextStack}vw)`);
+      //     console.log('nextStack : ', nextStack);
+      //   } else {
+      //     alert('첫번째 이미지입니다^^');
+      //   }
+      // });
     </script>
 
     <!-- <div class="alert alert-danger">

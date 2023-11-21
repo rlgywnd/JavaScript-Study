@@ -65,3 +65,16 @@ function A(money) {
   }
   return result;
 }
+
+function miliSeconds(m, s) {
+  let seconds = m * 60 + s;
+  return seconds * 1000;
+}
+
+function vat(a, b) {
+  let money = parseInt(a.toFixed());
+  if (b) {
+    return money - money * 0.1 - 1.5;
+  }
+  return money - money * 0.1;
+}
