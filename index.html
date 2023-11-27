@@ -106,10 +106,6 @@
     </nav>
 
     <script>
-      // window.addEventListener('scroll', () => {
-      //   console.log(window.scrollY);
-      // });
-
       $(window).on('scroll', () => {
         if (window.scrollY >= 50) {
           document.querySelector('.navbar-brand').style.fontSize = '20px';
@@ -123,6 +119,27 @@
       <p class="login-title">로그인하러 가기</p>
       <button id="login-btn">로그인</button>
     </div>
+    <div class="abc"></div>
+    <script>
+      // 스크롤 위치에따라 진척도 알려주는 UI
+      document.querySelector('.abc').style.border = '3px solid black';
+      window.addEventListener('scroll', () => {
+        // window.scroll
+        // console.log('실제 높이 :', document.querySelector('html').scrollHeight);
+        // console.log('스크롤양 :', document.querySelector('html').scrollTop);
+        // console.log('div높이 :', document.querySelector('html').clientHeight);
+        let position = document.querySelector('html').scrollTop;
+        // console.log('position :', position);
+        let scrollLength =
+          document.querySelector('html').scrollHeight -
+          document.querySelector('html').clientHeight;
+        console.log('scrollLength :', scrollLength);
+
+        document.querySelector('.abc').style.width = `${
+          (position / scrollLength) * 100
+        }%`;
+      });
+    </script>
 
     <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident
@@ -133,12 +150,13 @@
 
     <script>
       document.querySelector('.lorem').addEventListener('scroll', () => {
-        let scroll = document.querySelector('.lorem').scrollTop; // 스크롤 위치 아는법
-        let scrollHe = document.querySelector('.lorem').scrollHeight; // 스크롤바 실제 높이 구하는 법
+        let scroll = document.querySelector('.lorem').scrollTop; // 스크롤양 (스크롤 위치)
+        let scrollHe = document.querySelector('.lorem').scrollHeight; // 실제 높이
         let divHe = document.querySelector('.lorem').clientHeight; // div박스 높이
-        console.log(scroll);
-        console.log('스크롤 높이 : ', scrollHe);
-        console.log('div박스 높이: ', divHe);
+        // 스크롤양 + div높이 = 실제높이;
+        // console.log(scroll);
+        // console.log('스크롤 높이 : ', scrollHe);
+        // console.log('div박스 높이: ', divHe);
         if (scroll === 140) {
           alert('다 읽음.');
         }
@@ -238,7 +256,7 @@
           prevImg = 2;
         }
       });
-      console.log('prevImg : ', prevImg);
+      // console.log('prevImg : ', prevImg);
 
       // 번호매김 없이 그냥 다음 이전 버튼만 있을때 만들어보기
       // let nextStack = 0;
@@ -311,6 +329,18 @@
       });
       $('#close').on('click', () => {
         $('.black-bg').removeClass('show-modal');
+      });
+      $('.black-bg').on('click', (e) => {
+        // e.target -> 유저가 실제로 누른거
+        // e.currentTarget -> 이벤트리스너 달린 곳 -> this 랑 같음
+        // e.preventDefault(); -> 클릭 안한것처럼 동작해주세요
+        // e.stopPropagation(); -> 내 상위요소로 이벤트 버블링 막아줌
+        console.log('e.target :', e.target.className);
+        if (e.target.className === 'black-bg show-modal') {
+          $('.black-bg').removeClass('show-modal');
+        } else {
+          e.preventDefault();
+        }
       });
 
       // 2. 셀렉터로 class 탈부착 사용
