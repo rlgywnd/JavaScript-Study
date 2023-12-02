@@ -1,0 +1,19 @@
+.grey {
+  background: lightgrey;
+  height: 2000px;
+  margin-top: 500px;
+  /* display: flex; */
+}
+.image {
+  float: right;
+  width: 400px;
+  /* sticky는 fixed랑 다르게 조건부로 fixed효과 */
+  /* sticky를 부여한 노드를 만났을때 효과시작 */
+  /* 이 노드를 감싼 부모노드가 끝날때 효과도 끝 */
+  position: sticky;
+  top: 100px;
+}
+.text {
+  float: left;
+  width: 300px;
+}

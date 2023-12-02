@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hello, world!</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row"></div>
+    </div>
+    <div class="container my-3">
+      <button class="btn btn-danger" id="price">가격순정렬</button>
+    </div>
+    <div class="container my-3">
+      <button class="btn btn-danger" id="string-sort2">가나다순정렬</button>
+    </div>
+
+    <script>
+      $('#string-sort2').on('click', (e) => {
+        let newProducts = [...products];
+        newProducts.sort((a, b) => {
+          if (a.title > b.title) {
+            return 1;
+          }
+          if (a.title < b.title) {
+            return -1;
+          }
+        });
+        $('.row').html('');
+        newProducts.forEach((el) => {
+          $('.row').append(템플릿(el));
+        });
+      });
+    </script>
+
+    <div class="container my-3">
+      <button class="btn btn-danger" id="string-sort">다나가순정렬</button>
+    </div>
+
+    <script>
+      $('#string-sort').on('click', (e) => {
+        let newProducts = [...products];
+        newProducts.sort((a, b) => {
+          if (a.title > b.title) {
+            return -1;
+          }
+          if (a.title < b.title) {
+            return 1;
+          }
+        });
+        $('.row').html('');
+        newProducts.forEach((el) => {
+          $('.row').append(템플릿(el));
+        });
+      });
+    </script>
+
+    <div class="container my-3">
+      <button class="btn btn-danger" id="down">60000원이하</button>
+    </div>
+    <div class="container my-3">
+      <button class="btn btn-danger" id="default">원래대로</button>
+    </div>
+
+    <script>
+      $('#default').on('click', () => {
+        $('.row').html('');
+        products.forEach((el) => {
+          $('.row').append(템플릿(el));
+        });
+      });
+    </script>
+
+    <script>
+      $('#down').on('click', (e) => {
+        let newProducts = products.filter((el) => {
+          return el.price <= 60000;
+        });
+        $('.row').html('');
+        newProducts.forEach((el) => {
+          $('.row').append(템플릿(el));
+        });
+      });
+    </script>
+
+    <script>
+      var products = [
+        { id: 0, price: 70000, title: 'Blossom Dress' },
+        { id: 1, price: 50000, title: 'Springfield Shirt' },
+        { id: 2, price: 60000, title: 'Black Monastery' },
+      ];
+
+      // products.sort((a, b) => {
+      //   if (a.title > b.title) {
+      //     return -1;
+      //   }
+      //   if (a.title < b.title) {
+      //     return 1;
+      //   }
+      // });
+      // console.log('products 문자 내림차순정렬 :', products);
+
+      $('#price').on('click', (e) => {
+        let newProducts = [...products];
+        newProducts.sort((a, b) => {
+          return a.price - b.price;
+        });
+        $('.row').html('');
+        newProducts.forEach((el) => {
+          $('.row').append(템플릿(el));
+        });
+      });
+
+      // let arr = [7, 3, 5, 2, 40];
+      // let newArr = arr.filter((el) => {
+      //   return el > 5;
+      // });
+      // console.log(newArr);
+      // let result = arr.reduce((a, b) => {
+      //   return a + b;
+      // }, 0);
+      // console.log(result);
+
+      // // arr.sort(); // 문자정렬 -> [2,3,40,5,7];
+      // arr.sort((a, b) => {
+      //   // 숫자 오름차순 정렬
+      //   return a - b; // 내림차순 하고싶으면 b - a로
+      // });
+      // console.log(arr);
+      // let arr2 = ['b', 'a', 'c'];
+      // arr2.sort(); // abc or 가나다 순으로 문자정렬;
+      // console.log(arr2);
+
+      let 템플릿 = (data) => {
+        return `
+          <div class='col-sm-4' key=${data.id}>
+            <img src='https://via.placeholder.com/600' class='w-100' />
+            <h5>${data.title}</h5>
+            <p>가격 : ${data.price}</p>
+            <button class="buy">구매</button>
+          </div>
+        `;
+      };
+      products.forEach((el) => {
+        $('.row').append(템플릿(el));
+      });
+      $('.buy').on('click', (e) => {
+        console.log('클릭!', $(e.target).siblings('h5').text());
+        let cartTitle = $(e.target).siblings('h5').text();
+        let jsonArr = [];
+        if (
+          localStorage.getItem('cart') !== null &&
+          JSON.parse(localStorage.getItem('cart')).includes(cartTitle)
+        ) {
+          e.preventDefault();
+        } else if (localStorage.getItem('cart') !== null) {
+          jsonArr.push(...JSON.parse(localStorage.getItem('cart')));
+          jsonArr.push(cartTitle);
+          localStorage.setItem('cart', JSON.stringify(jsonArr));
+        } else {
+          jsonArr.push(cartTitle);
+          localStorage.setItem('cart', JSON.stringify(jsonArr));
+        }
+      });
+    </script>
+
+    <div class="container">
+      <button class="btn btn-danger" id="more">더보기</button>
+    </div>
+
+    <script>
+      let clickCount = 0;
+      $('#more').on('click', (e) => {
+        clickCount++;
+        if (clickCount === 1) {
+          $.get('https://codingapple1.github.io/js/more1.json')
+            .done((res) => {
+              res.forEach((el) => {
+                $('.row').append(템플릿(el));
+              });
+            })
+            .fail((err) => {
+              console.log('err :', err);
+            });
+        } else if (clickCount === 2) {
+          $.get('https://codingapple1.github.io/js/more2.json')
+            .done((res) => {
+              res.forEach((el) => {
+                $('.row').append(템플릿(el));
+              });
+            })
+            .fail((err) => {
+              console.log('err :', err);
+            });
+        } else {
+          e.preventDefault();
+        }
+      });
+      // moreObj.forEach((el) => {
+      //   $('.row').append(템플릿(el));
+      // });
+    </script>
+
+    <div class="container" style="margin-top: 20px">
+      <input type="text" id="sort-input" placeholder="이하 가격 입력." />
+      <button id="input-btn" type="submit">입력</button>
+    </div>
+
+    <script>
+      $('#input-btn').on('click', (e) => {
+        console.log(document.querySelector('#sort-input').value);
+        let val = document.querySelector('#sort-input').value;
+        $('.row').html('');
+        let newProducts = products.filter((el) => {
+          return el.price <= Number(val);
+        });
+        newProducts.forEach((el) => {
+          $('.row').append(템플릿(el));
+        });
+      });
+    </script>
+
+    <script>
+      // ajax는 새로고침없이 서버 요청 해주게 하는 기능
+      // let api = 'https://codingapple1.github.io/hello.txt';
+      // let api2 = 'https://codingapple1.github.io/price.json';
+      // $.get(`${api2}`).then((res) => {
+      //   // jquery에서 ajax 사용
+      //   console.log(res); // jquery ajax인 $.get() 같은 얘는 JSON -> object 자동 변환해줌
+      // });
+      // $.get(`${api}`)
+      //   .done((res) => {
+      //     console.log(res);
+      //   })
+      //   .fail((err) => {
+      //     console.log('err :', err);
+      //   });
+
+      // 브라우저 기본 함수 fetch 써도 ajax 가능!
+      // fetch(`${api2}`) // 쌩 자바스크립트에서 fetch사용해서 ajax사용
+      //   .then((res) => {
+      //     res.json(); // 받아온 JSON을 object로 바꿔주는 기능! ex) "{"a": 1}" -> {a:1}
+      //   })
+      //   .then((data) => {
+      //     console.log('fetch 사용 data :', data);
+      //   })
+      //   .catch((err) => {
+      //     console.log('fetch err :', err);
+      //   });
+    </script>
+
+    <script>
+      // var products = [
+      //   { id: 0, price: 70000, title: 'Blossom Dress' },
+      //   { id: 1, price: 50000, title: 'Springfield Shirt' },
+      //   { id: 2, price: 60000, title: 'Black Monastery' },
+      // ];
+      // for (let i = 0; i < products.length; i++) {
+      //   document.querySelectorAll('.card-title')[i].innerHTML =
+      //     products[i].title;
+      //   document.querySelectorAll('.card-price')[
+      //     i
+      //   ].innerHTML = `가격 : ${products[i].price}`;
+      // }
+      // for (let i = 0; i < products.length; i++) {
+      //   $('.card-title').eq(i).html(products[i].title);
+      //   $('.card-price').eq(i).html(products[i].price);
+      // }
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

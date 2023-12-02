@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="quiz">
+      <h4>물에 빠지면 누구먼저 구해?</h4>
+      <button>와이프</button>
+      <button>부모님</button>
+      <button>키우던 개</button>
+    </div>
+
+    <script>
+      document.querySelector('#quiz').addEventListener('click', function (e) {
+        // console.log(e.target.innerHTML);
+        switch (e.target.innerHTML) {
+          case '와이프':
+            console.log('와이프를 살렸네요');
+            break;
+          case '부모님':
+            console.log('부모님을 살렸네요');
+            break;
+          case '키우던 개':
+            console.log('개를 살렸네요.');
+            break;
+          default:
+            console.log('이상한거 눌렀네요~');
+        }
+      });
+
+      // let a = 2 + 2;
+      // switch (a) {
+      //   case 3:
+      //     alert('변수가 3입니다.');
+      //     break; // switch문을 중지해주세요~ 이거 안쓰면 다 실행됨.
+      //   case 4:
+      //     alert('변수가 4입니다.');
+      //     break;
+      //   default: // 위의 조건에 아무것도 해당안될때~
+      //     alert('아무것도 해당안됨.');
+      // }
+    </script>
+  </body>
+</html>

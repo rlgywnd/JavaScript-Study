@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p>장바구니 페이지</p>
+    </div>
+    <div class="cart-list"></div>
+    <div>
+      <button class="delete">장바구니 삭제</button>
+    </div>
+    <script>
+      $('.delete').on('click', (e) => {
+        localStorage.removeItem('cart');
+        $('.cart-list').html('');
+      });
+    </script>
+    <script>
+      let list = JSON.parse(localStorage.getItem('cart'));
+      let listTag = (data) => {
+        return `
+         <div>${data}</div>
+       `;
+      };
+      list.forEach((el) => {
+        $('.cart-list').append(listTag(el));
+      });
+    </script>
+  </body>
+</html>

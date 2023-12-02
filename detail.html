@@ -55,7 +55,93 @@
       .show {
         display: block;
       }
+      .form-hide {
+        display: none;
+      }
     </style>
+
+    <div class="container mt-3">
+      <div class="card p-3">
+        <span class="car-title"></span>
+        <span class="car-price"></span>
+      </div>
+    </div>
+
+    <form class="container my-5 form-group">
+      <p>상품선택</p>
+      <select class="form-select mt-2">
+        <option>모자</option>
+        <option>셔츠</option>
+        <option>바지</option>
+      </select>
+      <select class="form-select mt-2 form-hide"></select>
+    </form>
+
+    <!-- <div id="test"></div> -->
+
+    <script>
+      // let pTag = document.createElement('p');
+      // pTag.innerHTML = 'p태그!';
+      // document.querySelector('#test').appendChild(pTag);
+      // $('#test').append(pTag);
+    </script>
+
+    <script>
+      // function함수 , ()=>{} 화살표함수 둘이 약간 다른 특징이있는데 그 하나는
+      // this 키워드를 쓸때 function함수 내부에서 사용하면 그 함수를 가리킨다.
+      // 하지만 화살표함수는 밖의 전역을 가리킴
+      let shirts = [95, 100, 105, 110, 115];
+      let pants = [28, 30, 32, 34, 36, 38];
+      const obj = { a: 1, b: 2, c: 3 };
+      // for (let el in obj) {
+      //   console.log('el :', el);
+      //   console.log('obj[el] :', obj[el]);
+      // }
+      // for (let el of pants) {
+      //   console.log('for of 반복문 el : ', el);
+      // }
+
+      document
+        .querySelectorAll('.form-select')[0]
+        .addEventListener('change', (e) => {
+          console.log(e.target.value);
+          if (e.target.value === '셔츠') {
+            document.querySelectorAll('.form-select')[1].innerHTML = '';
+            shirts.forEach((el) => {
+              $('.form-select').eq(1).append(`<option>${el}</option>`);
+            });
+            document
+              .querySelectorAll('.form-select')[1]
+              .classList.remove('form-hide');
+          } else if (e.target.value === '모자') {
+            $('.form-select').eq(1).addClass('form-hide');
+          } else if (e.target.value === '바지') {
+            document
+              .querySelectorAll('.form-select')[1]
+              .classList.remove('form-hide');
+            $('.form-select').eq(1).html('');
+            // for 사용
+            // for (let i = 0; i < pants.length; i++) {
+            //   $('.form-select').eq(1).append(`<option>${pants[i]}</option>`);
+            // }
+            // map사용 -> 리턴 O
+            // pants.map((el) => {
+            //   $('.form-select').eq(1).append(`<option>${el}</option>`);
+            // });
+            // forEach사용 -> 리턴x 단순히 반복문 코드를 줄이기 위해 사용한다 생각!
+            pants.forEach((el) => {
+              $('.form-select').eq(1).append(`<option>${el}</option>`);
+            });
+          }
+        });
+      // console.log(document.querySelectorAll('.form-select')[0]);
+    </script>
+
+    <script>
+      const car = { name: '스포티지', price: [50000, 3000, 4000] };
+      document.querySelector('.car-title').innerHTML = car.name;
+      document.querySelector('.car-price').innerHTML = car.price[0];
+    </script>
 
     <div class="container mt-5">
       <ul class="list">

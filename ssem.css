@@ -1,0 +1,84 @@
+body {
+  /* border: 1px solid red; */
+  height: 1000px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  background-color: gainsboro;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  width: 400px;
+  margin: 300px 0 60px 0;
+}
+.title {
+  font-size: 30px;
+  /* border: 1px solid red; */
+}
+.input-btn-box {
+  display: flex;
+  /* width: 100%; */
+  /* border: 1px solid blue; */
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  gap: 3px;
+}
+.input-box {
+  width: 68%;
+  height: 70px;
+  border: 5px solid black;
+  display: flex;
+  /* align-items: center; */
+  padding: 0 15px 0 15px;
+  background-color: white;
+}
+#input-tag {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 30px;
+}
+.add-btn {
+  width: 80px;
+  height: 80px;
+  background-color: black;
+  color: white;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+.list-container {
+  /* border: 1px solid red; */
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  height: 70px;
+  padding: 0 15px 0 15px;
+  /* border: 1px solid blue; */
+}
+.list-text {
+  font-size: 30px;
+}
+.delete-btn {
+  width: 70px;
+  height: 70px;
+  background-color: white;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+.list-container {
+  height: 100%;
+  overflow-y: scroll;
+}

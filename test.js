@@ -78,3 +78,36 @@ function vat(a, b) {
   }
   return money - money * 0.1;
 }
+
+const 출석부 = ['흥민', '영희', '철수', '재석'];
+const 이름찾기 = (name) => {
+  for (let i = 0; i < 출석부.length; i++) {
+    if (출석부[i] === name) {
+      return '있어요!';
+    }
+  }
+  return '없어요...';
+};
+
+const numArr = [2, 3, 4, 5, 6, 7, 8, 9];
+const 구구단 = () => {
+  for (let i = 0; i < numArr.length; i++) {
+    for (let j = 1; j < 10; j++) {
+      console.log(numArr[i] * j);
+    }
+  }
+};
+
+const 우수한가 = (a, b) => {
+  let sum = 0;
+  for (let i = 0; i < a.length; i++) {
+    sum += a[i];
+  }
+  sum = sum / a.length;
+  if (sum > b) {
+    return `평균보다 ${sum - b}점 떨어졌네요..`;
+  } else if (sum < b) {
+    return `평균보다 ${b - sum}점 올랐네요!!!`;
+  }
+  return '그대로네요?';
+};
